@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>{{ title }} | Joydeep Tech</title>
+
+<link rel="stylesheet" href="/style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap"
+      rel="stylesheet">
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body class="article-page">
+
+<header class="header">
+
+    <a href="/" class="logo">
+        <img src="/image/Joydeeptech.png" alt="JoydeepTech">
+    </a>
+
+    <nav class="navbar">
+
+        <ul>
+
+            <li><a href="/">Home</a></li>
+
+            <li><a href="/search.html">Articles</a></li>
+
+            <li><a href="#">About</a></li>
+
+            <li><a href="#">Contact</a></li>
+
+        </ul>
+
+    </nav>
+
+    <div class="header-actions">
+
+        <button id="theme-toggle" class="theme-btn">
+
+            <i class="fa-solid fa-moon"></i>
+
+        </button>
+
+        <a href="/search.html" class="search-btn">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+        </a>
+
+        <button class="menu-toggle">
+
+            <i class="fa-solid fa-bars"></i>
+
+        </button>
+
+    </div>
+
+</header>
+
+
+<main>
+
+<section class="article-hero">
+
+    <div class="breadcrumb">
+
+        <a href="/">Home</a>
+
+        <span>></span>
+
+        <a href="/search.html">{{ category }}</a>
+
+        <span>></span>
+
+        <span>{{ title }}</span>
+
+    </div>
+
+
+    <div class="article-category">
+
+        {{ category }}
+
+    </div>
+
+
+    <h1>
+
+        {{ title }}
+
+    </h1>
+
+
+    <p>
+
+        {{ description }}
+
+    </p>
+
+
+    <div class="article-meta">
+
+        <div>
+            👤 {{ author }}
+        </div>
+
+        <div>
+
+            📅
+
+            <time datetime="{{ date | date('yyyy-MM-dd') }}">
+
+                {{ date | date("MMMM dd, yyyy") }}
+
+            </time>
+
+        </div>
+
+        <div>
+
+            ⏱ {{ read_time }}
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="article-intro">
+
+    <div class="intro-image">
+
+        <img src="{{ image }}" alt="{{ title }}">
+
+    </div>
+
+    <div class="intro-content">
+
+        <h2>{{ intro_heading }}</h2>
+
+        {{ intro | safe }}
+
+    </div>
+
+</section>
+
+
+<article class="article-content">
+
+    {{ body | safe }}
+
+</article>
+
+</main>
+
+
+<footer class="footer">
+
+    <div class="footer-container">
+
+        <div class="footer-box">
+
+            <img src="/image/Joydeeptech.png"
+                 alt="Joydeep Tech"
+                 class="footer-logo">
+
+            <p>
+                Learn Computers & Technology with easy tutorials,
+                programming guides, MS Office, Arduino, Photoshop,
+                and many more.
+            </p>
+
+        </div>
+
+
+        <div class="footer-box">
+
+            <h3>Quick Links</h3>
+
+            <ul>
+
+                <li><a href="/">Home</a></li>
+
+                <li><a href="/search.html">Articles</a></li>
+
+                <li><a href="#">About</a></li>
+
+                <li><a href="#">Contact</a></li>
+
+            </ul>
+
+        </div>
+
+
+        <div class="footer-box">
+
+            <h3>Categories</h3>
+
+            <ul>
+
+                <li><a href="#">Computer Fundamental</a></li>
+
+                <li><a href="#">Programming</a></li>
+
+                <li><a href="#">MS Office</a></li>
+
+                <li><a href="#">Arduino</a></li>
+
+                <li><a href="#">Photoshop</a></li>
+
+            </ul>
+
+        </div>
+
+
+        <div class="footer-box">
+
+            <h3>Legal</h3>
+
+            <ul>
+
+                <li><a href="#">Privacy Policy</a></li>
+
+                <li><a href="#">Terms & Conditions</a></li>
+
+                <li><a href="#">Disclaimer</a></li>
+
+            </ul>
+
+        </div>
+
+
+        <div class="footer-box">
+
+            <h3>Follow Us</h3>
+
+            <div class="social-icons">
+
+                <a href="https://www.facebook.com/joydeep.mukherjee.165/">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+
+                <a href="https://www.instagram.com/dilsejoydeep">
+                    <i class="fab fa-instagram"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 Joydeep Tech. All Rights Reserved.
+        </p>
+
+        <p class="designer-credit">
+
+            Designed & Developed with ❤️ by
+
+            <span>Joydeep Mukherjee</span>
+
+        </p>
+
+    </div>
+
+</footer>
+
+
+<script src="/script.js"></script>
+
+</body>
+
+</html>
