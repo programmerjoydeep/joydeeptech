@@ -1,1 +1,66 @@
+backend:
+  name: git-gateway
+  branch: main
 
+media_folder: "image/uploads"
+public_folder: "/image/uploads"
+
+collections:
+  - name: "articles"
+    label: "Articles"
+    label_singular: "Article"
+    folder: "content/articles"
+    create: true
+    slug: "{{slug}}"
+
+    fields:
+      - label: "Title"
+        name: "title"
+        widget: "string"
+
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - "Computer Fundamental"
+          - "Programming"
+          - "MS Office"
+          - "Web Development"
+          - "Graphics Design"
+          - "Arduino"
+          - "AI Tools"
+
+      - label: "Short Description"
+        name: "description"
+        widget: "text"
+
+      - label: "Author"
+        name: "author"
+        widget: "string"
+        default: "Joydeep Mukherjee"
+
+      - label: "Publish Date"
+        name: "date"
+        widget: "datetime"
+        format: "YYYY-MM-DD"
+
+      - label: "Read Time"
+        name: "read_time"
+        widget: "string"
+        default: "8 min read"
+
+      - label: "Featured Image"
+        name: "image"
+        widget: "image"
+
+      - label: "Intro Heading"
+        name: "intro_heading"
+        widget: "string"
+
+      - label: "Intro Content"
+        name: "intro"
+        widget: "markdown"
+
+      - label: "Article Content"
+        name: "body"
+        widget: "markdown"
