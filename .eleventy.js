@@ -1,13 +1,22 @@
 module.exports = function (eleventyConfig) {
 
+  // CSS and JavaScript
   eleventyConfig.addPassthroughCopy("style.css");
   eleventyConfig.addPassthroughCopy("script.js");
-  eleventyConfig.addPassthroughCopy("image");
 
-  // Keep Decap CMS configuration available
-  eleventyConfig.addPassthroughCopy("admin/config.yml");
+  // Root-level images
+  eleventyConfig.addPassthroughCopy("*.jpg");
+  eleventyConfig.addPassthroughCopy("*.jpeg");
+  eleventyConfig.addPassthroughCopy("*.png");
+  eleventyConfig.addPassthroughCopy("*.webp");
 
-  // Keep existing SEO files
+  // Decap CMS
+  eleventyConfig.addPassthroughCopy("admin");
+
+  // CMS uploaded images
+  eleventyConfig.addPassthroughCopy("uploads");
+
+  // SEO files
   eleventyConfig.addPassthroughCopy("robots.txt");
   eleventyConfig.addPassthroughCopy("sitemap.xml");
 
