@@ -155,7 +155,7 @@
 
         <h2>{{ intro_heading }}</h2>
 
-        {{ intro | safe }}
+        {{ intro | markdown | safe }}
 
     </div>
 
@@ -164,7 +164,7 @@
 
 <article class="article-content">
 
-    {{ body | safe }}
+    {{ body | markdown | safe }}
 
 </article>
 
