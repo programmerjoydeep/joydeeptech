@@ -8,38 +8,88 @@ const md = markdownIt({
 
 module.exports = function (eleventyConfig) {
 
-  // Markdown filter for CMS content
+  // =========================================
+  // MARKDOWN FILTER
+  // =========================================
+
   eleventyConfig.addFilter("markdown", function (value) {
     if (!value) return "";
     return md.render(value);
   });
 
-  // CSS and JavaScript
+
+  // =========================================
+  // CATEGORY FILTER
+  // =========================================
+  // Filters articles according to their category
+
+  eleventyConfig.addFilter("filterByCategory", function (articles, category) {
+
+    if (!articles || !category) {
+      return [];
+    }
+
+    return articles.filter(function (article) {
+
+      return article.data.category === category;
+
+    });
+
+  });
+
+
+  // =========================================
+  // CSS AND JAVASCRIPT
+  // =========================================
+
   eleventyConfig.addPassthroughCopy("style.css");
   eleventyConfig.addPassthroughCopy("script.js");
 
-  // Root-level images
+
+  // =========================================
+  // ROOT-LEVEL IMAGES
+  // =========================================
+
   eleventyConfig.addPassthroughCopy("*.jpg");
   eleventyConfig.addPassthroughCopy("*.jpeg");
   eleventyConfig.addPassthroughCopy("*.png");
   eleventyConfig.addPassthroughCopy("*.webp");
 
-  // Decap CMS
+
+  // =========================================
+  // DECAP CMS
+  // =========================================
+
   eleventyConfig.addPassthroughCopy("admin");
 
-  // CMS uploaded images
+
+  // =========================================
+  // CMS UPLOADED IMAGES
+  // =========================================
+
   eleventyConfig.addPassthroughCopy("uploads");
 
-  // SEO files
+
+  // =========================================
+  // SEO FILES
+  // =========================================
+
   eleventyConfig.addPassthroughCopy("robots.txt");
   eleventyConfig.addPassthroughCopy("sitemap.xml");
 
+
+  // =========================================
+  // ELEVENTY CONFIGURATION
+  // =========================================
+
   return {
+
     dir: {
       input: ".",
       includes: "_includes",
       output: "_site"
     }
+
   };
 
 };
