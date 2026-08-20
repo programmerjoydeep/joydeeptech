@@ -82,6 +82,28 @@ module.exports = function (eleventyConfig) {
   // ELEVENTY CONFIGURATION
   // =========================================
 
+  // =========================================
+  // AUTOMATIC CATEGORY LIST
+  // =========================================
+
+  eleventyConfig.addCollection("categoryList", function (collectionApi) {
+
+    const categories = new Set();
+
+    collectionApi.getAll().forEach(function (item) {
+
+      if (item.data.category) {
+
+        categories.add(item.data.category);
+
+      }
+
+    });
+
+    return Array.from(categories).sort();
+
+  });
+  
   return {
 
     dir: {
