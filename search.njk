@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Search Articles | Joydeep Tech</title>
+
+    <link rel="stylesheet" href="/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<header class="header">
+
+    <a href="/" class="logo">
+
+        <img src="/Joydeeptech.png"
+             alt="JoydeepTech">
+
+    </a>
+
+
+    <nav class="navbar">
+
+        <ul>
+
+            <li>
+                <a href="/">Home</a>
+            </li>
+
+            <li>
+                <a href="/search.html">Articles</a>
+            </li>
+
+            <li>
+                <a href="#">About</a>
+            </li>
+
+            <li>
+                <a href="#">Contact</a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+    <div class="header-actions">
+
+        <button id="theme-toggle"
+                class="theme-btn">
+
+            <i class="fa-solid fa-moon"></i>
+
+        </button>
+
+
+        <a href="/search.html"
+           class="search-btn">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+        </a>
+
+
+        <button class="menu-toggle">
+
+            <i class="fa-solid fa-bars"></i>
+
+        </button>
+
+    </div>
+
+</header>
+
+
+<main>
+
+<!-- ============================= -->
+<!-- SEARCH HERO -->
+<!-- ============================= -->
+
+<section class="search-hero">
+
+    <h1>Search Articles</h1>
+
+    <p>
+        Find tutorials, projects and technology articles quickly.
+    </p>
+
+
+    <form class="search-box"
+          id="search-form">
+
+        <input
+            type="text"
+            id="search-input"
+            placeholder="Search tutorials..."
+            autocomplete="off">
+
+        <button type="submit">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+        </button>
+
+    </form>
+
+
+    <p class="result-count">
+
+        Showing
+        <strong>{{ collections.articles | length }}</strong>
+        results
+
+    </p>
+
+</section>
+
+
+<!-- ============================= -->
+<!-- CATEGORY FILTER -->
+<!-- ============================= -->
+
+<section class="search-categories">
+
+    <a href="#"
+       class="active"
+       data-category="All">
+
+        All
+
+    </a>
+
+
+    {% set categories = [] %}
+
+    {% for article in collections.articles %}
+
+        {% if article.data.category and article.data.category not in categories %}
+
+            {% set categories = categories.concat([article.data.category]) %}
+
+        {% endif %}
+
+    {% endfor %}
+
+
+    {% for category in categories %}
+
+        <a href="#"
+           data-category="{{ category }}">
+
+            {{ category }}
+
+        </a>
+
+    {% endfor %}
+
+</section>
+
+
+<!-- ============================= -->
+<!-- SEARCH RESULTS -->
+<!-- ============================= -->
+
+<section class="search-results">
+
+    {% for article in collections.articles %}
+
+    <article class="card"
+             data-title="{{ article.data.title | lower }}"
+             data-category="{{ article.data.category | lower }}"
+             data-description="{{ article.data.description | lower }}">
+
+        {% if article.data.image %}
+
+        <img src="{{ article.data.image }}"
+             alt="{{ article.data.title }}">
+
+        {% endif %}
+
+
+        <div class="card-content">
+
+            {% if article.data.category %}
+
+            <span class="category-badge">
+
+                {{ article.data.category }}
+
+            </span>
+
+            {% endif %}
+
+
+            <h3>
+
+                {{ article.data.title }}
+
+            </h3>
+
+
+            {% if article.data.description %}
+
+            <p>
+
+                {{ article.data.description }}
+
+            </p>
+
+            {% endif %}
+
+
+            <a href="{{ article.url }}">
+
+                Read More →
+
+            </a>
+
+        </div>
+
+    </article>
+
+    {% endfor %}
+
+</section>
+
+
+</main>
+
+
+<!-- ============================= -->
+<!-- FOOTER -->
+<!-- ============================= -->
+
+<footer class="footer">
+
+    <div class="footer-container">
+
+
+        <div class="footer-box">
+
+            <img src="/Joydeeptech.png"
+                 alt="Joydeep Tech"
+                 class="footer-logo">
+
+            <p>
+
+                Learn Computers & Technology with easy
+                tutorials, programming guides, MS Office,
+                Arduino, Photoshop, and many more.
+
+            </p>
+
+        </div>
+
+
+        <div class="footer-box">
+
+            <h3>Quick Links</h3>
+
+            <ul>
+
+                <li>
+                    <a href="/">Home</a>
+                </li>
+
+                <li>
+                    <a href="/search.html">Articles</a>
+                </li>
+
+                <li>
+                    <a href="#">About</a>
+                </li>
+
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <div class="footer-box">
+
+            <h3>Categories</h3>
+
+            <ul>
+
+                <li>
+                    <a href="#">Computer Fundamental</a>
+                </li>
+
+                <li>
+                    <a href="#">Programming</a>
+                </li>
+
+                <li>
+                    <a href="#">MS Office</a>
+                </li>
+
+                <li>
+                    <a href="#">Arduino</a>
+                </li>
+
+                <li>
+                    <a href="#">Photoshop</a>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <div class="footer-box">
+
+            <h3>Legal</h3>
+
+            <ul>
+
+                <li>
+                    <a href="#">Privacy Policy</a>
+                </li>
+
+                <li>
+                    <a href="#">Terms & Conditions</a>
+                </li>
+
+                <li>
+                    <a href="#">Disclaimer</a>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <div class="footer-box">
+
+            <h3>Follow Us</h3>
+
+            <div class="social-icons">
+
+                <a href="https://www.facebook.com/joydeep.mukherjee.165/"
+                   target="_blank">
+
+                    <i class="fab fa-facebook-f"></i>
+
+                </a>
+
+
+                <a href="https://www.instagram.com/dilsejoydeep"
+                   target="_blank">
+
+                    <i class="fab fa-instagram"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+
+            © 2026 Joydeep Tech.
+            All Rights Reserved.
+
+        </p>
+
+
+        <p class="designer-credit">
+
+            Designed & Developed with ❤️ by
+
+            <span>Joydeep Mukherjee</span>
+
+        </p>
+
+    </div>
+
+</footer>
+
+
+<script src="/script.js"></script>
+
+
+<!-- ============================= -->
+<!-- SEARCH JAVASCRIPT -->
+<!-- ============================= -->
+
+<script>
+
+const searchForm =
+    document.getElementById("search-form");
+
+const searchInput =
+    document.getElementById("search-input");
+
+const results =
+    document.querySelectorAll(".search-results .card");
+
+const resultCount =
+    document.querySelector(".result-count");
+
+const categoryButtons =
+    document.querySelectorAll("[data-category]");
+
+
+let selectedCategory = "All";
+
+
+function filterArticles() {
+
+    const searchTerm =
+        searchInput.value.toLowerCase().trim();
+
+    let visibleCount = 0;
+
+
+    results.forEach(article => {
+
+        const title =
+            article.dataset.title || "";
+
+        const category =
+            article.dataset.category || "";
+
+        const description =
+            article.dataset.description || "";
+
+
+        const matchesSearch =
+            title.includes(searchTerm) ||
+            category.includes(searchTerm) ||
+            description.includes(searchTerm);
+
+
+        const matchesCategory =
+            selectedCategory === "All" ||
+            category === selectedCategory.toLowerCase();
+
+
+        if (matchesSearch && matchesCategory) {
+
+            article.style.display = "";
+
+            visibleCount++;
+
+        } else {
+
+            article.style.display = "none";
+
+        }
+
+    });
+
+
+    resultCount.innerHTML =
+        `Showing <strong>${visibleCount}</strong> result${visibleCount !== 1 ? "s" : ""}`;
+
+}
+
+
+searchForm.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    filterArticles();
+
+});
+
+
+searchInput.addEventListener("input", function() {
+
+    filterArticles();
+
+});
+
+
+categoryButtons.forEach(button => {
+
+    button.addEventListener("click", function(event) {
+
+        event.preventDefault();
+
+
+        categoryButtons.forEach(btn => {
+
+            btn.classList.remove("active");
+
+        });
+
+
+        this.classList.add("active");
+
+
+        selectedCategory =
+            this.dataset.category;
+
+
+        filterArticles();
+
+    });
+
+});
+
+
+</script>
+
+</body>
+
+</html>
