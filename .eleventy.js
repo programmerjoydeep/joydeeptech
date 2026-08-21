@@ -13,8 +13,75 @@ module.exports = function (eleventyConfig) {
   // =========================================
 
   eleventyConfig.addFilter("markdown", function (value) {
+
     if (!value) return "";
+
     return md.render(value);
+
+  });
+
+
+  // =========================================
+  // DATE FILTER
+  // =========================================
+  // Formats dates for Nunjucks templates
+
+  eleventyConfig.addFilter("date", function (value, format) {
+
+    if (!value) return "";
+
+    const date = new Date(value);
+
+    if (isNaN(date.getTime())) {
+      return value;
+    }
+
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ];
+
+    // yyyy-MM-dd
+    if (format === "yyyy-MM-dd") {
+
+      const year = date.getFullYear();
+
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+
+      const day = String(date.getDate()).padStart(2, "0");
+
+      return `${year}-${month}-${day}`;
+
+    }
+
+
+    // MMMM dd, yyyy
+    if (format === "MMMM dd, yyyy") {
+
+      const month = months[date.getMonth()];
+
+      const day = String(date.getDate()).padStart(2, "0");
+
+      const year = date.getFullYear();
+
+      return `${month} ${day}, ${year}`;
+
+    }
+
+
+    // Default format
+    return date.toISOString().split("T")[0];
+
   });
 
 
@@ -26,7 +93,9 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("filterByCategory", function (articles, category) {
 
     if (!articles || !category) {
+
       return [];
+
     }
 
     return articles.filter(function (article) {
@@ -39,10 +108,26 @@ module.exports = function (eleventyConfig) {
 
 
   // =========================================
+  // ARTICLES COLLECTION
+  // =========================================
+  // Gets all Markdown articles created through
+  // Decap CMS from content/articles/
+
+  eleventyConfig.addCollection("articles", function (collectionApi) {
+
+    return collectionApi.getFilteredByGlob(
+      "content/articles/*.md"
+    );
+
+  });
+
+
+  // =========================================
   // CSS AND JAVASCRIPT
   // =========================================
 
   eleventyConfig.addPassthroughCopy("style.css");
+
   eleventyConfig.addPassthroughCopy("script.js");
 
 
@@ -51,8 +136,11 @@ module.exports = function (eleventyConfig) {
   // =========================================
 
   eleventyConfig.addPassthroughCopy("*.jpg");
+
   eleventyConfig.addPassthroughCopy("*.jpeg");
+
   eleventyConfig.addPassthroughCopy("*.png");
+
   eleventyConfig.addPassthroughCopy("*.webp");
 
 
@@ -75,12 +163,9 @@ module.exports = function (eleventyConfig) {
   // =========================================
 
   eleventyConfig.addPassthroughCopy("robots.txt");
+
   eleventyConfig.addPassthroughCopy("sitemap.xml");
 
-
-  // =========================================
-  // ELEVENTY CONFIGURATION
-  // =========================================
 
   // =========================================
   // AUTOMATIC CATEGORY LIST
@@ -103,13 +188,22 @@ module.exports = function (eleventyConfig) {
     return Array.from(categories).sort();
 
   });
-  
+
+
+  // =========================================
+  // ELEVENTY CONFIGURATION
+  // =========================================
+
   return {
 
     dir: {
+
       input: ".",
+
       includes: "_includes",
+
       output: "_site"
+
     }
 
   };
